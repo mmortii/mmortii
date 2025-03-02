@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @mmortii
 - 👀 If you want to support me, buy a subscription https://store.mmortii.com
 - 🤍 I like to create something new
-- 📑 You can see the documentation on the website https://docs.mortii.com or on GitHub
+- 📑 You can see the documentation on the website https://docs.mmortii.com or on GitHub
 - 📫 You can write to me at hello@mortii.com
 - 🍿 Take popcorn
 - 🕶️ Enjoy watching
