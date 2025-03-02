@@ -2,7 +2,7 @@
 - 👀 If you want to support me, buy a subscription https://store.mmortii.com
 - 🤍 I like to create something new
 - 📑 You can see the documentation on the website https://wiki.mortii.com or on GitHub
-- 📫 You can write to me at hi@mortii.com
+- 📫 You can write to me at hello@mortii.com
 - 🍿 Take popcorn
 - 🕶️ Enjoy watching
 
