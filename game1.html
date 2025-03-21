@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Своя Игра</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body {
+            font-family: Jost, sans-serif;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -o-user-select: none;
+            text-align: center;
+            background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC") repeat 0 0;
+            color: white;
+        }
+
+        .board {
+            padding-top: 0.5%;
+            display: grid;
+            grid-template-rows: repeat(5, 1fr);
+            grid-auto-flow: column;
+            gap: 5px;
+            max-width: calc(100% - 1%);
+            margin: auto;
+        }
+
+        .cell {
+            font-family: Quicksand;
+            color: white;
+            padding-top: calc((100% / 10));
+            padding-bottom: calc((100% / 10));
+            font-weight: bold;
+            font-size: 73px;
+            background: rgba(64, 64, 64, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cell:hover {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .question-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #dadada;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            background: rgba(64, 64, 64, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .close-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 0, 0, 0.8);
+            width: 100px;
+            height: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .teams {
+            position: absolute;
+            display: flex;
+            bottom: 1%;
+            max-width: calc(100% - 1%);
+        }
+
+        .team {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            color: black;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .team button {
+            align-items: center;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: transparent 0 0 0 3px,rgba(18, 18, 18, .1) 0 6px 20px;
+            box-sizing: border-box;
+            color: #121212;
+            cursor: pointer;
+            display: inline-flex;
+            flex: 1 1 auto;
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            justify-content: center;
+            line-height: 1;
+            margin: 0;
+            outline: none;
+            padding: 1rem 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            transition: box-shadow .2s,-webkit-box-shadow .2s;
+            white-space: nowrap;
+            border: 0;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            width: auto;
+        }
+
+        .team button:hover {
+            box-shadow: #121212 0 0 0 3px, transparent 0 0 0 0;
+        }
+
+        .category-row {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            max-width: calc(100% - 1%);
+            color: black;
+            font-weight: bold;
+            padding: 10px;
+            font-size: xx-large;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="category-row" id="categories"></div>
+    <div class="teams" id="teams"></div>
+    <div class="board" id="game-board"></div>
+    <div class="question-box" id="question-box">
+        <p id="question-text"></p>
+        <button class="close-btn" onclick="closeQuestion()">Закрыть</button>
+    </div>
+    <script>
+        let questions = [];
+        let teams = [];
+
+        function loadSettings() {
+            let data = {
+              "teams": ["Команда 1", "Команда 2", "Команда 3", "Команда 4"],
+              "questions": [
+                { "category": "История", "value": 100, "question": "Кто был первым президентом России?" },
+                { "category": "История", "value": 200, "question": "В каком году произошла Куликовская битва?" },
+                { "category": "История", "value": 300, "question": "Кто написал \"Историю государства Российского\"?" },
+                { "category": "История", "value": 400, "question": "Какой город был столицей России до Санкт-Петербурга?" },
+                { "category": "История", "value": 500, "question": "Кто правил Россией во время Великой Северной войны?" },
+                
+                { "category": "География", "value": 100, "question": "Какая река является самой длинной в мире?" },
+                { "category": "География", "value": 200, "question": "Какой самый большой океан на Земле?" },
+                { "category": "География", "value": 300, "question": "Как называется самая высокая гора в Европе?" },
+                { "category": "География", "value": 400, "question": "В какой стране находится пустыня Сахара?" },
+                { "category": "География", "value": 500, "question": "Сколько всего материков на Земле?" },
+            
+                { "category": "Наука", "value": 100, "question": "Кто сформулировал законы движения и тяготения?" },
+                { "category": "Наука", "value": 200, "question": "Какой химический элемент обозначается буквой 'O'?" },
+                { "category": "Наука", "value": 300, "question": "Какая планета является самой крупной в Солнечной системе?" },
+                { "category": "Наука", "value": 400, "question": "Кто открыл теорию относительности?" },
+                { "category": "Наука", "value": 500, "question": "Как называется процесс превращения воды в пар?" },
+            
+                { "category": "Литература", "value": 100, "question": "Кто написал роман 'Преступление и наказание'?" },
+                { "category": "Литература", "value": 200, "question": "Какое настоящее имя у Александра Сергеевича Пушкина?" },
+                { "category": "Литература", "value": 300, "question": "Кто автор романа 'Война и мир'?" },
+                { "category": "Литература", "value": 400, "question": "В каком веке жил Уильям Шекспир?" },
+                { "category": "Литература", "value": 500, "question": "Как называется произведение, в котором главный герой — Гулливер?" },
+            
+                { "category": "Музыка", "value": 100, "question": "Как звали композитора, написавшего 'Лунную сонату'?" },
+                { "category": "Музыка", "value": 200, "question": "В каком стиле музыки работал Моцарт?" },
+                { "category": "Музыка", "value": 300, "question": "Как называется нотная система из пяти линий?" },
+                { "category": "Музыка", "value": 400, "question": "Какой инструмент считается самым сложным для освоения?" },
+                { "category": "Музыка", "value": 500, "question": "Какой композитор написал 'Щелкунчик'?" }
+              ]
+            };
+
+            questions = data.questions;
+            questions.sort(function(a, b) {
+                if(a.value > b.value) return -1;
+                if(a.value < b.value) return 1;
+                return 0;
+            });
+            teams = data.teams.map(team => ({ name: team, score: 0 }));
+            renderBoard();
+            renderTeams();
+        }
+
+        function renderBoard() {
+            let categoriesDiv = $("#categories");
+            let board = $("#game-board");
+            categoriesDiv.empty();
+            board.empty();
+            
+            let categories = new Set(questions.map(q => q.category));
+            
+            categories.forEach(cat => {
+                categoriesDiv.append(`<div>${cat}</div>`);
+
+                let filteredQuestions = questions.filter(q => q.category === cat);
+
+                filteredQuestions.forEach((q, index) => {
+                    board.append(`<div class='cell' onclick='showQuestion(${index})'>${q.value}</div>`);
+                });
+            });
+        }
+
+        function showQuestion(index) {
+            let questionBox = $("#question-box");
+            $("#question-text").text(questions[index].question);
+            questionBox.show();
+        }
+
+        function closeQuestion() {
+            $("#question-box").hide();
+        }
+
+        function updateScore(teamIndex, delta) {
+            teams[teamIndex].score += delta;
+            renderTeams();
+        }
+
+        function renderTeams() {
+            let teamsDiv = $("#teams");
+            teamsDiv.empty();
+            teams.forEach((team, index) => {
+                teamsDiv.append(`<div class='team'>${team.name}: ${team.score}  <button onclick='updateScore(${index}, 100)'>+100</button> <button onclick='updateScore(${index}, -100)'>-100</button></div>`);
+            });
+        }
+
+        $(document).ready(() => {
+            loadSettings();
+        });
+    </script>
+</body>
+</html>
