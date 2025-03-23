@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetaWare</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">MW</div>
+    <nav>
+        <a href="#about">О продукте</a>
+        <a href="#screenshots">Скриншоты</a>
+        <a href="#support">Поддержка</a>
+    </nav>
+</header>
+
+<section id="hero">
+    <h1>MetaWare</h1>
+    <p>Лучший софт для Critical Ops</p>
+    
+    <div class="hero-box">
+        <button class="btn">Купить сейчас!</button>
+        <button class="btn btn-secondary">Подробнее...</button>
+    </div>
+
+    <img src="arrow-down.svg" alt="Down" class="scroll-arrow">
+</section>
+
+<div class="divider"></div>
+<h2 class="section-title">О продукте</h2>
+
+<section id="about" class="about">
+    <div class="about-item">
+        <img src="shield.svg" alt="Защита">
+        <p>Безопасность — защита от банов</p>
+    </div>
+    <div class="about-item">
+        <img src="star.svg" alt="Качество">
+        <p>Качество — стабильно и без лагов</p>
+    </div>
+    <div class="about-item">
+        <img src="settings.svg" alt="Удобство">
+        <p>Удобство — простой интерфейс</p>
+    </div>
+</section>
+
+<div class="divider"></div>
+<h2 class="section-title">Скриншоты</h2>
+
+<section id="screenshots" class="screenshots">
+    <div class="image-container"><img src="1.jpeg" alt="Скриншот 1"></div>
+    <div class="image-container"><img src="2.jpeg" alt="Скриншот 2"></div>
+    <div class="image-container"><img src="3.jpeg" alt="Скриншот 3"></div>
+</section>
+
+<div class="divider"></div>
+<h2 class="section-title">Поддержка</h2>
+
+<section id="support" class="support">
+    <p>Возникли вопросы? Напишите нам в Telegram:</p>
+    <a href="https://t.me/MetaWareSupport" target="_blank">@MetaWareSupport</a>
+</section>
+
+<script>
+    // Плавный скролл
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Запрет на выделение изображений
+    document.querySelectorAll('img').forEach(img => {
+        img.setAttribute('draggable', 'false');
+        img.style.userSelect = 'none';
+    });
+</script>
+
+</body>
+</html>

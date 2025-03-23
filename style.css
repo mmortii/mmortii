@@ -1,0 +1,190 @@
+/* Общие стили */
+body {
+    background: #0a0a0a;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Хедер */
+header {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(10, 10, 10, 0.9);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #00aaff;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+nav a {
+    white-space: nowrap;
+    padding: 8px 15px;
+    background: rgba(0, 170, 255, 0.2);
+    border-radius: 20px;
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+}
+
+nav a:hover {
+    background: rgba(0, 170, 255, 0.4);
+}
+
+/* Hero-блок */
+#hero {
+    height: calc(100vh + 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(to bottom, #001F3F, #000a12);
+    border-radius: 0 0 30px 30px;
+}
+
+#hero h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #00aaff;
+}
+
+#hero p {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* Hero-бокс с кнопками */
+.hero-box {
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #00aaff;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+    background: #0088cc;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Разделители */
+.divider {
+    width: 80%;
+    height: 2px;
+    background: rgba(0, 170, 255, 0.2);
+    margin: 50px auto 20px;
+}
+
+/* Заголовки разделов */
+.section-title {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Секция "О продукте" */
+.about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin: 30px auto;
+    max-width: 800px;
+}
+
+.about-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.about-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.about-item p {
+    font-size: 1.2em;
+    color: #ddd;
+}
+
+/* Скриншоты */
+.screenshots {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 30px auto;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.4);
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.05);
+}
+
+/* Поддержка */
+.support {
+    margin: 30px auto;
+}
+
+.support p {
+    font-size: 1.2em;
+}
+
+.support a {
+    font-size: 1.4em;
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.support a:hover {
+    text-decoration: underline;
+}
